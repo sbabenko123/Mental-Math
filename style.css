@@ -1,0 +1,110 @@
+/* Apply modern font and layout */
+body {
+    font-family: 'Inter', sans-serif;
+    background: #fdfdfd;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 700px;
+    padding: 2rem;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #007bff;
+  }
+  
+  .card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+  
+  input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  input[type=number] {
+    appearance: textfield;
+  }
+  
+  .blue-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 0.5rem 1.5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .problem-text {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  #feedback {
+    margin-top: 1rem;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+  }
+  
+  .operation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+  }
+  
+  .op-btn {
+    background: white;
+    border: 2px solid #007bff;
+    color: #007bff;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    flex: 1;
+    margin: 0 0.25rem;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .op-btn.selected {
+    background: #007bff;
+    color: white;
+  }
+  

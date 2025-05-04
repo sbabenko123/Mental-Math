@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Math Practice</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Mental Math Practice</h1>
+
+    <div class="card">
+      <div class="operation-buttons">
+        <button class="op-btn selected" data-op="+">+</button>
+        <button class="op-btn" data-op="-">−</button>
+        <button class="op-btn" data-op="×">×</button>
+        <button class="op-btn" data-op="÷">÷</button>
+      </div>
+
+      <label>Digits for first number:
+        <input type="number" id="digitsA" min="1" value="3" />
+      </label>
+
+      <label>Digits for second number:
+        <input type="number" id="digitsB" min="1" value="3" />
+      </label>
+
+      <label>Exclude digits:
+        <input type="text" id="excludeDigits" placeholder="e.g. 0,1" />
+      </label>
+
+      <label>
+        <input type="checkbox" id="allowNegatives" /> Include negative numbers
+      </label>
+
+      <label>
+        <input type="checkbox" id="integerDivision" /> Integer solutions for division
+      </label>
+
+      <button class="blue-button" onclick="generateProblem()">Generate Problem</button>
+
+      <div id="problemDisplay" class="problem-text"></div>
+
+      <input type="number" id="userAnswer" placeholder="Your answer" />
+      <button class="blue-button" onclick="checkAnswer()">Submit</button>
+      <div id="feedback"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,110 +1,174 @@
 /* Apply modern font and layout */
 body {
-    font-family: 'Inter', sans-serif;
-    background: #fdfdfd;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+  font-family: 'Inter', sans-serif;
+  background: #fdfdfd;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
   
-  .container {
-    width: 100%;
-    max-width: 700px;
-    padding: 2rem;
-  }
+.container {
+  width: 100%;
+  max-width: 700px;
+  padding: 2rem;
+}
+
+h1 {
+  text-align: center;
+  color: #007bff;
+}
+
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+input[type="number"], input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  appearance: textfield;
+}
+
+.blue-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.5rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+}
+
+.problem-text {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+#feedback {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.answer-container {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  gap: 0.5rem; /* Add spacing between rows */
+}
+
+.answer-actions {
+  display: flex;
+  justify-content: space-between; /* Align Submit button to the left and counter to the right */
+  align-items: center; /* Vertically align items */
+}
+
+  #correctCounter {
+  margin-left: auto; /* Push the counter to the right */
+  margin-top: auto;
+  font-weight: bold;
+  color: #000000; /* Optional: Add a color for emphasis */
+}
+
+.operation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.op-btn {
+  background: white;
+  border: 2px solid #007bff;
+  color: #007bff;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  flex: 1;
+  margin: 0 0.25rem;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
   
-  h1 {
-    text-align: center;
-    color: #007bff;
-  }
+.op-btn.selected {
+  background: #007bff;
+  color: white;
+}
   
-  .card {
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  label {
-    display: block;
-    margin-top: 1rem;
-    font-weight: 600;
-  }
-  
-  input[type="number"], input[type="text"] {
-    width: 100%;
-    padding: 0.5rem;
-    margin-top: 0.25rem;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  input[type=number] {
-    appearance: textfield;
-  }
-  
-  .blue-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 999px;
-    padding: 0.5rem 1.5rem;
-    margin-top: 1rem;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .problem-text {
-    margin-top: 2rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  #feedback {
-    margin-top: 1rem;
-    font-weight: 600;
-    color: #333;
-    text-align: center;
-  }
-  
-  .operation-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin: 1rem 0;
-  }
-  
-  .op-btn {
-    background: white;
-    border: 2px solid #007bff;
-    color: #007bff;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    flex: 1;
-    margin: 0 0.25rem;
-    transition: all 0.2s;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .op-btn.selected {
-    background: #007bff;
-    color: white;
-  }
-  
+.zen-button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.zen-button:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+.dropdown {
+  margin-bottom: 1rem;
+}
+
+.dropdown-content {
+  max-height: 0; /* Start with height 0 (hidden) */
+  opacity: 0; /* Start fully transparent */
+  overflow: hidden; /* Hide overflowing content */
+  transition: max-height 0.3s ease, opacity 0.3s ease; /* Smooth transition */
+}
+
+.dropdown-content.show {
+  max-height: 1000px; /* Large enough to fit content */
+  opacity: 1; /* Fully visible */
+}
+
+.dropdown-content label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.dropdown-content .operation-buttons {
+  margin-bottom: 1rem;
+}

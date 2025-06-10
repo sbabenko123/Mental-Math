@@ -50,7 +50,6 @@ function getSelectedOperations() {
 }
 
 function generateProblem() {
-  triesLeft = 2;
   revealNext = false;
   feedback.textContent = "";
   userAnswerInput.value = "";
@@ -126,43 +125,24 @@ function generateProblem() {
 }
 
 function checkAnswer() {
-  if (correctAnswer === null) return;
-
-  if (revealNext) {
-    generateProblem();
-    return;
-  }
+  if (correctAnswer === null || revealNext) return;
 
   const userVal = parseInt(userAnswerInput.value);
 
-  if (isNaN(userVal)) {
-    feedback.textContent = "Please enter a number.";
-    return;
-  }
+  if (isNaN(userVal)) return;
 
   if (userVal === correctAnswer) {
     const endTime = Date.now();
     const timeTaken = ((endTime - startTime)/1000).toFixed(2);
-    feedback.textContent = `✅ Correct! You took ${timeTaken} seconds.`;
     correctCount++;
     document.getElementById("correctCounter").textContent = `Correct: ${correctCount}`;
-    revealNext = true;
-  } else {
-    triesLeft--;
-    if (triesLeft > 0) {
-      feedback.textContent = `❌ Try again. (${triesLeft} left)`;
-    } else {
-      feedback.textContent = `Answer: ${correctAnswer}`;
-      revealNext = true;
-    }
+    generateProblem();
+    revealNext = false;
+    feedback.textContent = `✅ Correct! You took ${timeTaken} seconds.`;
   }
 }
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    checkAnswer();
-  }
-});
+userAnswerInput.addEventListener("input", checkAnswer);
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "z" || event.key === "Z") { // Check if the "m" key is pressed
@@ -175,3 +155,51 @@ function toggleDropdown() {
   const dropdownContent = document.getElementById("dropdownContent");
   dropdownContent.classList.toggle("show"); // Add or remove the "show" class
 }
+
+
+
+// Show numpad on mobile/tablet
+function isMobile() {
+  return /Mobi|Android|iPad|iPhone/i.test(navigator.userAgent);
+}
+if (isMobile() || !isMobile()) {
+  document.getElementById('numpad').style.display = 'block';
+}
+
+document.querySelectorAll('.numpad-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    if (this.id === 'numpad-del') {
+      const start = userAnswerInput.selectionStart;
+      const end = userAnswerInput.selectionEnd;
+      if (start === end && start > 0) {
+        userAnswerInput.value = userAnswerInput.value.slice(0, start - 1) + userAnswerInput.value.slice(end);
+        userAnswerInput.setSelectionRange(start - 1, start - 1);
+      } else {
+        userAnswerInput.value = userAnswerInput.value.slice(0, start) + userAnswerInput.value.slice(end);
+        userAnswerInput.setSelectionRange(start, start);
+      }
+      userAnswerInput.dispatchEvent(new Event('input'));
+    } else if (this.id === 'numpad-clear') {
+      userAnswerInput.value = '';
+      userAnswerInput.dispatchEvent(new Event('input'));
+    } else if (this.id === 'numpad-left') {
+      const pos = userAnswerInput.selectionStart;
+      if (pos > 0) {
+        userAnswerInput.setSelectionRange(pos - 1, pos - 1);
+      }
+    } else if (this.id === 'numpad-right') {
+      const pos = userAnswerInput.selectionStart;
+      if (pos < userAnswerInput.value.length) {
+        userAnswerInput.setSelectionRange(pos + 1, pos + 1);
+      }
+    } else {
+      const start = userAnswerInput.selectionStart;
+      const end = userAnswerInput.selectionEnd;
+      const val = userAnswerInput.value;
+      userAnswerInput.value = val.slice(0, start) + this.textContent + val.slice(end);
+      userAnswerInput.setSelectionRange(start + 1, start + 1);
+      userAnswerInput.dispatchEvent(new Event('input'));
+    }
+    userAnswerInput.focus();
+  });
+});

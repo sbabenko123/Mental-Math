@@ -8,56 +8,123 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="main-header">
+    <a href="https://g.co/kgs/vty8iyu" class="logo" target="_blank" rel="noopener">Bellevue Math Tutor</a>
+    <nav>
+      <a href="index.html">Integer Operations</a>
+      <a href="times-tables.html">Times Tables</a>
+      <a href="exponents.html">Exponents</a>
+    </nav>
+  </header>
   <div class="container">
-    <h1>Mental Math Practice</h1>
+    <h1>Integer Operations</h1>
 
     <div class="card">
-      <div class="dropdown">
-        <div id="dropdownContent" class="dropdown-content show">
-          <div class="operation-buttons">
-            <button class="op-btn selected" data-op="+">+</button>
-            <button class="op-btn" data-op="-">−</button>
-            <button class="op-btn" data-op="×">×</button>
-            <button class="op-btn" data-op="÷">÷</button>
-          </div>
+  <div class="dropdown">
+    <div id="dropdownContent" class="dropdown-content show">
+      <div class="operation-buttons">
+        <button class="op-btn selected" data-op="+">+</button>
+        <button class="op-btn" data-op="-">−</button>
+        <button class="op-btn" data-op="×">×</button>
+        <button class="op-btn" data-op="÷">÷</button>
+      </div>
+      <label>Digits for first number:
+        <input type="number" id="digitsA" min="1" value="1" />
+      </label>
+      <label>Digits for second number:
+        <input type="number" id="digitsB" min="1" value="1" />
+      </label>
+      <label>Exclude digits:
+        <input type="text" id="excludeDigits" placeholder="e.g. 0,1" />
+      </label>
+      <label>
+        <input type="checkbox" id="allowNegatives" /> Include negative numbers
+      </label>
+      <label>
+        <input type="checkbox" id="integerDivision" /> Integer solutions only for division
+      </label>
+      <div class="start-feedback-row">
+        <button class="blue-button" id="startButton">Start</button>
+        <div id="feedback"></div>
+      </div>
+    </div>
+  </div>
 
-          <label>Digits for first number:
-            <input type="number" id="digitsA" min="1" value="1" />
-          </label>
+  <div id="countdown" class="countdown" style="display:none;text-align:center;font-size:2rem;font-weight:bold;margin:2rem 0;"></div>
 
-          <label>Digits for second number:
-            <input type="number" id="digitsB" min="1" value="1" />
-          </label>
-
-          <label>Exclude digits:
-            <input type="text" id="excludeDigits" placeholder="e.g. 0,1" />
-          </label>
-
-          <label>
-            <input type="checkbox" id="allowNegatives" /> Include negative numbers
-          </label>
-
-          <label>
-            <input type="checkbox" id="integerDivision" /> Integer solutions only for division
-          </label>
-
-          <button class="blue-button" onclick="generateProblem()">Generate Problem</button>
+  <div id="practiceContent" class="practice-content hidden">
+    <div id="problemDisplay" class="problem-text"></div>
+    <div class="answer-container">
+      <input type="number" id="userAnswer" placeholder="Your answer" />
+      <div class="answer-actions">
+        <button class="red-button" id="endButton" style="display:none;">End</button>
+        <span id="correctCounter">Correct: 0</span>
+      </div>
+      <div id="numpad" class="numpad">
+        <div class="numpad-row">
+          <button type="button" class="numpad-btn">1</button>
+          <button type="button" class="numpad-btn">2</button>
+          <button type="button" class="numpad-btn">3</button>
+        </div>
+        <div class="numpad-row">
+          <button type="button" class="numpad-btn">4</button>
+          <button type="button" class="numpad-btn">5</button>
+          <button type="button" class="numpad-btn">6</button>
+        </div>
+        <div class="numpad-row">
+          <button type="button" class="numpad-btn">7</button>
+          <button type="button" class="numpad-btn">8</button>
+          <button type="button" class="numpad-btn">9</button>
+        </div>
+        <div class="numpad-row">
+          <button type="button" class="numpad-btn" id="numpad-left">←</button>
+          <button type="button" class="numpad-btn">0</button>
+          <button type="button" class="numpad-btn" id="numpad-right">→</button>
+        </div>
+        <div class="numpad-row">
+          <button type="button" class="numpad-btn" id="numpad-del">⌫</button>
+          <button type="button" class="numpad-btn" id="numpad-clear">C</button>
         </div>
       </div>
-
-      <div id="problemDisplay" class="problem-text"></div>
+    </div>
+  </div>
+</div>
+      <!-- <div id="problemDisplay" class="problem-text"></div>
 
       <div class="answer-container">
         <input type="number" id="userAnswer" placeholder="Your answer" />
         <div class="answer-actions">
-         <button class="blue-button" onclick="checkAnswer()">Submit</button>
+         
          <span id="correctCounter">Correct: 0</span>
+         <div id="numpad" class="numpad">
+            <div class="numpad-row">
+                <button type="button" class="numpad-btn">1</button>
+                <button type="button" class="numpad-btn">2</button>
+                <button type="button" class="numpad-btn">3</button>
+            </div>
+            <div class="numpad-row">
+                <button type="button" class="numpad-btn">4</button>
+                <button type="button" class="numpad-btn">5</button>
+                <button type="button" class="numpad-btn">6</button>
+            </div>
+            <div class="numpad-row">
+                <button type="button" class="numpad-btn">7</button>
+                <button type="button" class="numpad-btn">8</button>
+                <button type="button" class="numpad-btn">9</button>
+            </div>
+            <div class="numpad-row">
+                <button type="button" class="numpad-btn" id="numpad-left">←</button>
+                <button type="button" class="numpad-btn">0</button>
+                <button type="button" class="numpad-btn" id="numpad-right">→</button>
+            </div>
+            <div class="numpad-row">
+                <button type="button" class="numpad-btn" id="numpad-del">⌫</button>
+                <button type="button" class="numpad-btn" id="numpad-clear">C</button>
+            </div>
         </div>
-      </div>
-      <div id="feedback"></div>
-    </div>
-  </div>
-  <button class="zen-button" onclick="toggleDropdown()">Zen Mode</button>
-  <script src="script.js"></script>
+        </div>
+      </div> -->
+
+  <script src="script-integer.js"></script>
 </body>
 </html>

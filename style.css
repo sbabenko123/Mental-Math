@@ -19,7 +19,41 @@ h1 {
   text-align: center;
   color: #007bff;
 }
-
+.main-header {
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  height: 3.5rem;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:0 2rem;
+  z-index: 1000;
+  font-family: 'Inter', sans-serif;
+}
+  .main-header .logo {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #007bff;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+  .main-header nav a {
+  color: #222;
+  text-decoration: none;
+  margin-left: 2rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+  .main-header nav a:hover {
+  color: #007bff;
+}
+  body {
+  padding-top: 3.5rem; /* Prevent content from being hidden under header */
+}
 .card {
   background: white;
   padding: 2rem;
@@ -27,6 +61,36 @@ h1 {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   width: 100%;
   box-sizing: border-box;
+  min-height: 240px;
+  transition: min-height 1s;
+}
+
+.learn-row {
+  display: flex;
+  gap: 0.1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.learn-btn {
+  background: #fff;
+  color: #007bff;
+  border: 2px solid #007bff;
+  border-radius: 12px;
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.2s, color 0.2s;
+}
+.learn-btn.selected {
+  background: #007bff;
+  color: #fff;
+}
+
+.countdown {
+  transition: opacity 0.3s;
+  opacity: 1;
 }
 
 label {
@@ -38,7 +102,7 @@ label {
 input[type="number"], input[type="text"] {
   width: 100%;
   padding: 0.5rem;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   border-radius: 10px;
   border: 1px solid #ccc;
   font-size: 1rem;
@@ -56,6 +120,20 @@ input[type=number] {
   appearance: textfield;
 }
 
+input[type="number"]:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #007bff; /* Optional: keep your theme color */
+}
+
+.start-feedback-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  width: 100%;
+}
+
 .blue-button {
   background: #007bff;
   color: white;
@@ -67,6 +145,21 @@ input[type=number] {
   font-size: 1rem;
   font-weight: 600;
   font-family: 'Inter', sans-serif;
+}
+
+.red-button {
+  background: #ff4d4f;
+  color: #fff;
+  border: 2px solid #ff4d4f;
+  border-radius: 12px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.red-button:hover {
+  background: #ff7875;
+  border-color: #ff7875;
 }
 
 .problem-text {
@@ -171,4 +264,179 @@ input[type=number] {
 
 .dropdown-content .operation-buttons {
   margin-bottom: 1rem;
+}
+
+/* times tables */
+
+.number-selectors {
+  display: flex;
+  gap: 2vw;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.number-selectors > div {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.number-column {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: auto;
+  gap: 0.3rem;
+  align-items: start;
+  justify-items: center;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  /* Remove flex styles if present */
+}
+.num-btn.selected, .select-all-btn.selected {
+  background: #007bff;
+  color: white;
+}
+
+.num-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  max-width: 2.5rem;
+  max-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-align: center;
+  margin: 0;
+  border-radius: 12px;
+  border: 2px solid #007bff;
+  background: white;
+  color: #007bff;
+}
+
+.select-all-btn {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  background: #ffffff;
+  color: #007bff;
+  border: 2px solid #007bff;
+  border-radius: 12px;
+  padding: 0.2rem 0.7rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+
+.number-selectors-outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#startButton {
+  margin-top: 1rem;
+  align-self: center;
+}
+/* hide input at first */
+.practice-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(.4,2,.6,1), opacity 0.3s;
+}
+.practice-content.show {
+  max-height: none; /* adjust as needed */
+  opacity: 1;
+}
+.hidden {
+  display: none;
+}
+
+/*Toggle Advanced Standard*/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 26px;
+  vertical-align: middle;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: background 0.3s;
+  border-radius: 26px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #fff;
+  transition: transform 0.3s;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+input:checked + .slider {
+  background-color: #007bff;
+}
+input:checked + .slider:before {
+  transform: translateX(18px);
+}
+.mode-label {
+  font-weight: 500;
+  color: #888;
+  transition: color 0.2s;
+}
+.mode-label.active {
+  color: #007bff;
+}
+.numpad {
+  margin: 1rem auto 0 auto;
+  max-width: 240px;
+  user-select: none;
+}
+.numpad-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+.numpad-btn {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  min-height: 60px;
+  max-width: 60px;
+  max-height: 60px;
+  padding: 0;
+  font-size: 1.5rem;
+  border: 1px solid #007bff;
+  background: #fff;
+  color: #007bff;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.numpad-btn:active {
+  background: #007bff;
+  color: #fff;
 }

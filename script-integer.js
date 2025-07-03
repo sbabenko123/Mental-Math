@@ -5,7 +5,8 @@ let startTime = null;
 
 const problemDisplay = document.getElementById("problemDisplay");
 const userAnswerInput = document.getElementById("userAnswer");
-const feedback = document.getElementById("feedback");
+const feedbackSettings = document.getElementById("feedback-settings");
+const feedbackProblem = document.getElementById("feedback-problem");
 const operationButtons = document.querySelectorAll(".op-btn");
 const integerDivisionCheckbox = document.getElementById("integerDivision");
 const startButton = document.getElementById("startButton");
@@ -14,10 +15,10 @@ const dropdownContent = document.getElementById("dropdownContent");
 const practiceContent = document.getElementById("practiceContent");
 const countdownEl = document.getElementById("countdown");
 
+
 operationButtons.forEach(btn => {
   btn.addEventListener("click", () => {
-    operationButtons.forEach(b => b.classList.remove("selected"));
-    btn.classList.add("selected");
+    btn.classList.toggle("selected");
   });
 });
 
@@ -50,9 +51,7 @@ function generateRandomNumber(digits, exclude = []) {
 
 function generateProblem() {
   revealNext = false;
-  feedback.textContent = "";
   userAnswerInput.value = "";
-
   startTime = Date.now();
 
   const digitsA = parseInt(document.getElementById("digitsA").value);
@@ -61,30 +60,6 @@ function generateProblem() {
   const allowNeg = document.getElementById("allowNegatives").checked;
   const operations = getSelectedOperations();
   const integerDivisionOnly = integerDivisionCheckbox.checked;
-
-  if (operations.length === 0) {
-    feedback.textContent = "Select at least one operation.";
-    return;
-  }
-
-  if (isNaN(digitsA) || isNaN(digitsB)) {
-    feedback.textContent = "Enter a digit length."
-    return;
-  }
-
-  if (digitsA <= 0 || digitsB <= 0) {
-    feedback.textContent = "Enter a digit length greater than zero."
-    return;
-  }
-
-  if (
-    integerDivisionOnly &&
-    operations.includes("÷") &&
-    digitsA < digitsB
-  ) {
-    feedback.textContent = "To allow integer division, the first number must have at least as many digits as the second.";
-    return;
-  }
 
   const exclude = excludeInput ? excludeInput.split(/[^\d]/).filter(Boolean) : [];
   let a = generateRandomNumber(digitsA, exclude);
@@ -135,7 +110,7 @@ function checkAnswer() {
     const timeTaken = ((endTime - startTime)/1000).toFixed(2);
     correctCount++;
     document.getElementById("correctCounter").textContent = `Correct: ${correctCount}`;
-    feedback.textContent = `✅ Correct! You took ${timeTaken} seconds.`;
+    feedbackProblem.textContent = `Correct! ✅ You took ${timeTaken} seconds.`;
     generateProblem();
     revealNext = false;
   }
@@ -166,6 +141,39 @@ function showCountdown() {
 
 // Start/End button logic
 startButton.addEventListener('click', function() {
+  // Always get the latest values
+  const digitsA = document.getElementById("digitsA").value;
+  const digitsB = document.getElementById("digitsB").value;
+  const integerDivisionOnly = integerDivisionCheckbox.checked;
+  const operations = getSelectedOperations();
+
+  // Validate digit inputs
+  if (
+    digitsA === "" || digitsB === "" ||
+    isNaN(Number(digitsA)) || isNaN(Number(digitsB)) ||
+    Number(digitsA) <= 0 || Number(digitsB) <= 0
+  ) {
+    feedbackSettings.textContent = "Please enter a valid digit length for both numbers.";
+    return;
+  }
+
+  // Validate operation selection
+  if (operations.length === 0) {
+    feedbackSettings.textContent = "Select at least one operation.";
+    return;
+  }
+
+  // Validate integer division constraint
+  if (
+    integerDivisionOnly &&
+    operations.includes("÷") &&
+    Number(digitsA) < Number(digitsB)
+  ) {
+    feedbackSettings.textContent = "To allow integer division, the first number must have at least as many digits as the second.";
+    return;
+  }
+
+  // All checks passed, start session
   startButton.style.display = 'none';
   dropdownContent.classList.remove('show');
   setTimeout(() => {
@@ -182,6 +190,7 @@ endButton.addEventListener('click', function() {
   startButton.style.display = 'inline-block';
   this.style.display = 'none';
   userAnswerInput.disabled = false;
+  feedbackProblem.textContent = "";
 });
 
 // Input and numpad logic

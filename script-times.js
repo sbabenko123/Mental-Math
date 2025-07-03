@@ -285,6 +285,7 @@ function checkTimesTableAnswer() {
     inverseAverages.push(inv);
 
     document.getElementById('correctCounter').textContent = `Correct: ${correctCount}`;
+    document.getElementById('feedback-problem').textContent = `Correct! ✅ You took ${timeTaken.toFixed(2)} seconds.`;
     if (graphVisible) drawGraph();
     generateTimesTableProblem();
     revealNext = false;
@@ -375,8 +376,10 @@ function drawGraph() {
 function isMobile() {
   return /Mobi|Android|iPad|iPhone/i.test(navigator.userAgent);
 }
-if (isMobile() || !isMobile()) {
+if (isMobile()) {
   document.getElementById('numpad').style.display = 'block';
+} else {
+  document.getElementById('numpad').style.display = 'none';
 }
 
 document.querySelectorAll('.numpad-btn').forEach(btn => {

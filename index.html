@@ -34,6 +34,7 @@
       <label>Digits for second number:
         <input type="number" id="digitsB" min="1" value="1" />
       </label>
+
       <label>Exclude digits:
         <input type="text" id="excludeDigits" placeholder="e.g. 0,1" />
       </label>
@@ -45,7 +46,7 @@
       </label>
       <div class="start-feedback-row">
         <button class="blue-button" id="startButton">Start</button>
-        <div id="feedback"></div>
+        <div id="feedback-settings"></div>
       </div>
     </div>
   </div>
@@ -55,9 +56,11 @@
   <div id="practiceContent" class="practice-content hidden">
     <div id="problemDisplay" class="problem-text"></div>
     <div class="answer-container">
-      <input type="number" id="userAnswer" placeholder="Your answer" />
+      <!-- <input type="number" id="userAnswer" placeholder="Your answer" /> -->
+      <input type="text" id="userAnswer" placeholder="Your answer" inputmode="numeric" pattern="[0-9\-]*" />
       <div class="answer-actions">
         <button class="red-button" id="endButton" style="display:none;">End</button>
+        <div id="feedback-problem"></div>
         <span id="correctCounter">Correct: 0</span>
       </div>
       <div id="numpad" class="numpad">
